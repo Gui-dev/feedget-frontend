@@ -6,6 +6,7 @@ import { FeedbackContentStep } from './Steps/FeedbackContentStep'
 import bugImageUrl from './../../assets/bug.png'
 import ideaImageUrl from './../../assets/idea.png'
 import thoughtImageUrl from './../../assets/thought.png'
+import { FeedbackSuccessStep } from './Steps/FeedbackSuccessStep'
 
 export const feedbackTypes = {
   BUG: {
@@ -35,8 +36,10 @@ export type FeedbackType = keyof typeof feedbackTypes
 
 export const WidgetForm = () => {
   const [feedbackType, setFeedbackType] = useState<FeedbackType | null>(null)
+  const [feedbackSent, setFeedbackSent] = useState(false)
 
   const handleRestartFeedback = () => {
+    setFeedbackSent(false)
     setFeedbackType(null)
   }
 
@@ -44,17 +47,29 @@ export const WidgetForm = () => {
     <div
       className="flex flex-col items-center bg-zinc-900 p-4 relative rounded-2xl mb-4 shadow-lg w-[calc(100vw-2rem)] md:w-auto"
     >
-
-      {!feedbackType
-        ? (
-            <FeedbackTypeStep onFeedbackTypeChanged={setFeedbackType}/>
-          )
-        : (
-            <FeedbackContentStep
-              feedbackType={feedbackType}
+      {
+        feedbackSent
+          ? (
+            <FeedbackSuccessStep
               onFeedbackRestartRequested={handleRestartFeedback}
             />
-          )
+            )
+          : (
+            <>
+              {!feedbackType
+                ? (
+                    <FeedbackTypeStep onFeedbackTypeChanged={setFeedbackType}/>
+                  )
+                : (
+                    <FeedbackContentStep
+                      feedbackType={feedbackType}
+                      onFeedbackRestartRequested={handleRestartFeedback}
+                      onFeedbackSent={setFeedbackSent}
+                    />
+                  )
+              }
+            </>
+            )
       }
 
       <footer className="text-xs text-neutral-400">
