@@ -9,11 +9,11 @@ gives suggestions for ideas, and more.
 # Screens
 
 <p align="left">
-<img src="./.screens/home.png" width="30%" />
+<img src="./.screens/home.png" width="100%" />
 &nbsp; &nbsp;
-<img src="./.screens/feedbacks.png" width="30%" />
+<img src="./.screens/feedbacks.png" width="100%" />
 &nbsp; &nbsp;
-<img src="./.screens/form.png" width="30%" />
+<img src="./.screens/form.png" width="100%" />
 </p>
 
 ## Technologies used
